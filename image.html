@@ -1,0 +1,464 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="bg-[#101624]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image</title>
+   <script src="https://cdn.tailwindcss.com"></script> 
+
+    <link href="{% static 'style/style.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e1738124a0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <style>
+         #sidebar.active {
+    width: 240px;
+    z-index: 30;
+}
+
+#sidebar.active #titlem {
+    display: inline;
+    
+    pointer-events: none;
+    z-index: 30;
+}
+
+#sidebar.active #bar {
+    
+    z-index: 30;
+}
+
+#sidebar.active #newchat {
+  display:inline;
+  color:white;
+  font-size:20px;
+  
+    
+    
+}
+#sidebar.active #random{
+  width:210px;
+  display:flex;
+  padding:14px;
+}
+
+#sidebar.active #random2{
+  display:flex;
+  width:210px;
+  padding:8px;
+}
+#sidebar.active #settings{
+  display:inline;
+}
+#sidebar.active #logout{
+  display:inline;
+}
+
+.refresh  #browse{
+    z-index:-99;
+}
+.refresh #file{
+    z-index:-99;
+}
+.refresh #cloud{
+    z-index: -99;
+}
+.refresh #para{
+    z-index: -99;
+}
+.refresh #select-img{
+    z-index:-99;
+}
+.refresh #render{
+    z-index:40;
+}
+.refresh .profile-small{
+    z-index:40;
+}
+.refresh .question{
+    z-index:40;
+}
+.refresh .ans-sign{
+    z-index:40;
+}
+.refresh .contain-head{
+    z-index:40;
+}
+.img{
+
+    position:relative;
+    top:0;
+    bottom:0;left:0;
+    right:0;
+    z-index:200;
+}
+.imgArea{
+    position:absolute;
+    width:40px;
+    height:40px;
+    object-fit:fill;
+    background-color: pink;
+    margin-right:10px;
+}
+
+
+#some .load {
+    height:230px;
+    overflow-y: auto;
+
+}
+#some .load left{
+    margin-top:0;
+}
+#some .load  #imgArea{
+    display:block;
+}
+.adjust{
+    width:310px;
+    height:250px;
+    margin-left:70px;
+    object-fit:fill;
+    border-radius:12px;
+
+}
+
+
+
+
+
+
+
+    </style>
+
+
+    <!-- navbar -->
+    
+
+
+
+
+
+    <div class="contain bg-[#101624] w-full absolute top-[70px] bottom-[125px] overflow-y-scroll">
+    <div id="images" class="w-[200px] h-[200px]  ml-[200px]"></div>
+  
+        <div class="contain-info bg-[#101624] absolute top-[30px] w-6/12 ml-[420px] p-4 ">
+              <div id="browse"  class="  absolute  mt-[100px] ml-[205px] z-10 p-5 px-16 py-14 bg-[#3b4e7c] w-fit  rounded-xl text-center shadow-xl">
+                
+                <input type="file" id="file" class="hidden">
+                
+                
+                   
+                <i id="cloud" class="fa-solid fa-cloud-arrow-up fa-2xl  mb-5"></i>
+                
+                <p id="para" class="text-[#ffffffb9] text-3xl">Upload Image </p>
+                
+                <button id="select-img" class="btn w-full mt-10 text-xl rounded-xl p-[15px] bg-[#fff]">Select image</button>
+                <!-- <button id="globe">
+                    <i class="fa-solid fa-globe fa-2xl mt-16"></i>
+                </button>
+                <p id="para"class="text-[#ffffffb9]  text-3xl mt-5">Search the web</p> -->
+
+            
+
+             
+
+            </div>  
+
+            <div id="render" class=" -z-50">
+              
+
+            </div>
+
+</div>
+</div>
+
+
+
+
+    <footer >
+        <div class="input-container   bg-[#101624] w-full fixed bottom-0  border-none ">
+            <!-- <form action="{% url 'api_chat' %}" id="genaichat" method="get"> -->
+                
+                
+                    <div id="some" class="h-[80px]  w-6/12 p-5 bg-[#273557] flex justify-between  ml-[420px] mb-8 mt-5 rounded-lg  text-[#ffffffc0]  text-xl border-none outline-none focus:bg-[#3b4e7c] focus:text-[#fff] " >
+
+                      <div class="left flex">
+                        <div  id="imgArea"></div>
+                        <input  type="text" id="prompt" class="bg-[#273557] border-none outline-none focus:border-hidden ml-[60px] mt-2 " placeholder="Enter your prompt here">
+                        
+                        
+                      </div>
+                       
+                       
+                       
+                       
+                       
+                        <div class="right flex items-center">
+                            <button id="upload-btn" class="bg-transparent border-none  outline-none mx-4">
+                                <i class="fa-solid fa-upload fa-xl" style="color: #e6e9ef7b; "></i>
+                            </button>
+                            <button id="search-btn" class="search bg-transparent border-none outline-none mx-4  " type="submit">
+                                <i class="fa-solid fa-magnifying-glass fa-xl" style="color: #e6e9ef7b; " ></i>
+                                </button>
+                             
+
+                       </div>
+                      
+
+                    </div>
+                    
+                
+               
+
+                
+               
+                
+            <!-- </form> -->
+
+            
+        </div>
+    </footer>
+    <!-- sidebar -->
+
+    <div id="sidebar"  class=" fixed top-0 bottom-0 lg:left-0  bg-[#29395d] w-[90px] transition duration-500 ease-in-out ">
+
+        <div class="p-3.5 rounded-md w-full flex justify-between items-center">
+          <h1 id="titlem" class=" text-[#ffffffb6] ml-5  text-3xl text-bold hidden ">Buzz</h1>
+          <i class="fa-solid fa-bars fa-2xl pl-6 mt-4 cursor-pointer" style="color: #f0f2f5;" id="bar"></i>
+  
+          
+        </div>   
+  
+  
+         <div class="p-2 rounded-md w-full mt-24 ">
+            <div id="random" class="  newchat p-6 pt-8 pb-8 rounded-md bg-[#3b4e7c] flex  justify-around gap-5 items-center hover:bg-[#101624]  cursor-pointer"  >
+              <i class="fa-solid fa-plus fa-xl pr-4 " id="plus  "  style="color: #fafcff;"></i>
+              <h1 id="newchat" class=" text-white text-2xl pr-8 hidden">New Chat</h1>
+            </div>
+           
+        </div>  
+  
+  
+          <div class=" p-2 rounded-md  absolute bottom-20 bg-[#3b4e7c] hover:bg-[#101624] ml-1  ">
+          <div id="random2" class=" p-5   rounded-sm  flex  justify-around gap-1 items-center  ">
+            <i class="fa-solid fa-gear fa-xl " style="color: #f5f9ff; "></i>
+            <h1 id="settings" class=" text-white text-2xl  hidden">settings</h1>
+          </div> 
+         
+         </div>
+  
+       <div class="p-2 rounded-md md:mb-1.5  absolute bottom-0.5 bg-[#3b4e7c] hover:bg-[#101624] ml-1  ">
+        <div id="random2" class=" p-5 rounded-sm  flex  justify-around gap-1 items-center ">
+          <i class="fa-solid fa-right-from-bracket fa-xl " style="color: #f5f9ff;"></i>
+          <h1 id="logout" class=" text-white text-2xl  hidden">logout</h1>
+        </div> 
+       
+     </div>  
+  
+  
+  
+  
+  
+  
+  
+    </div>  
+    
+  
+  
+
+<script>
+const some=document.getElementById("#some");
+
+//sidebar toggle
+let sidebar=document.querySelector("#sidebar");
+  let bar=document.querySelector("#bar");
+
+
+  bar.addEventListener("click",function(){
+    sidebar.classList.toggle("active");
+  });
+
+
+ let containInfo = document.querySelector(".contain-info");
+let promptText = document.getElementById("prompt");
+let imgArea = document.querySelector("#imgArea");
+let render = document.getElementById("render");
+let search = document.getElementById("search-btn");
+const selectImg = document.getElementById("select-img");
+const inputFile = document.getElementById("file");
+
+selectImg.addEventListener("click", function() {
+  inputFile.click();
+});
+let uploadContent=document.getElementById('upload-btn');
+
+uploadContent.addEventListener("click",function(){
+  inputFile.click();
+  
+
+})
+
+inputFile.addEventListener("change", function() {
+  const image = this.files[0];
+
+  if (!image) { // Handle no image selected case
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const imgUrl = reader.result;
+
+    const img = document.createElement('img');
+    img.src = imgUrl;
+    img.classList.add("img"); // Add your desired styling class
+    imgArea.classList.add("imgArea");
+
+    imgArea.innerHTML = ''; // Clear previous image (optional)
+    
+    imgArea.appendChild(img);
+  };
+
+  reader.readAsDataURL(image);
+});
+
+search.addEventListener("click", function() {
+  containInfo.classList.add("refresh");
+  imgArea.classList.remove("imgArea");
+
+  const prompt = promptText.value;
+  let imageContent = "";
+
+  if (imgArea.querySelector('img')) {
+    imageContent = imgArea.querySelector('img');
+  }
+
+  const imp = document.createElement('div');
+  imgArea.innerHTML = '';
+  imp.innerHTML = `
+    <div class="contain-head flex items-center gap-3 -z-50">
+      <div class="profile-small bg-orange-600 h-[40px] w-[40px] rounded-full m-5 -z-50"></div>
+      <div class="question text-[#ffffffd0] -z-50" id="question">${prompt} </div> `;
+
+        if(imageContent){
+            imageContent.classList.add('adjust');
+            imp.appendChild(imageContent);
+        }
+        imp.innerHTML +=   `</div>` ;
+    
+
+  render.appendChild(imp);
+  promptText.value="";
+  imgArea.innerHTML="";
+  
+});
+
+
+
+
+//   let containInfo=document.querySelector(".contain-info");
+//   let promptText=document.getElementById("prompt");
+//  let imgInput=document.getElementById("imgArea");
+//  let render=document.getElementById("render");
+  
+//   let search=document.getElementById("search-btn");
+//   const selectImg=document.getElementById("select-img");
+//   const inputFile=document.getElementById("file")
+//   selectImg.addEventListener("click",function(){
+
+//     inputFile.click();
+
+
+//   });
+//  const imgArea=document.querySelector("#imgArea");
+//  inputFile.addEventListener("change",function(){
+     
+//     const image=this.files[0];
+//     console.log(image);
+//     const reader=new FileReader();
+//     reader.onload= ()=> {
+
+//         const imgUrl=reader.result;
+
+//         const img=document.createElement('img');
+//         img.src=imgUrl;
+//         img.classList.add("img");
+
+//         imgArea.classList.add("imgArea");
+
+
+//         imgArea.appendChild(img);
+
+//     }
+//     reader.readAsDataURL(image);
+//  })
+
+ 
+
+
+
+//   search.addEventListener("click",function(){
+//     containInfo.classList.toggle("refresh");
+
+//     const prompt = promptText.value;
+//      let imageContent = ""; 
+
+//   if (imgInput.files.length > 0) {
+    
+//     const imageFile = imgInput.files[0];
+    
+//     imageContent.src= imgUrl;
+
+//     const imp=document.createElement('div');
+//     imp.innerHTML=` <div class="contain-head flex items-center gap-3 -z-50"> 
+//                      <div class="profile-small bg-orange-600 h-[40px] w-[40px] rounded-full m-5 -z-50">
+
+//                     </div> 
+//                      <div class="question text-[#ffffffd0] -z-50" id="question">${prompt} ${imageContent}</div> </div>`;
+    
+//   }
+
+  
+
+//     // const result = `<b>Prompt:</b> ${prompt} ${imageContent}`;
+
+  
+//     render.appendChild(imp);
+
+
+//   });
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+</script>
+
+    
+</body>
+</html>
